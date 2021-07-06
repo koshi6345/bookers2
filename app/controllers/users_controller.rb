@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
   before_action :ensure_correct_user, only: [:edit, :update]
+  before_action :set_user, only: [:show, :edit, :followeds, :followers]
 
   def show
-    @user = User.find(params[:id])
     @books = @user.books
     @book = Book.new
   end
@@ -13,7 +13,6 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
   end
 
   def update
@@ -22,6 +21,12 @@ class UsersController < ApplicationController
     else
       render "edit"
     end
+  end
+
+  def followeds
+  end
+
+  def followers
   end
 
   private
@@ -35,4 +40,9 @@ class UsersController < ApplicationController
       redirect_to user_path(current_user)
     end
   end
+
+  def set_user
+    @user = User.find(params[:id])
+  end
+
 end
