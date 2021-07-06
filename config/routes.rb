@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
+  get 'searches/search'
   devise_for :users
   root 'homes#top'
   get 'home/about' => 'homes#about'
   get 'followeds/:id' => 'users#followeds', as: "followeds"
   get 'followers/:id' => 'users#followers', as: "followers"
+  get 'search' => "searches#search"
   resources :users, only: [:show,:index,:edit,:update] do
     resource :relationships, only: [:create, :destroy]
   end
